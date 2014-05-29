@@ -5,7 +5,7 @@
   = @article.title
 %p
   %b Article attachment:
-  = @article.article_attachment
+  = link_to "Right click to download", @article.article_attachment.url
 %p
   %b Attachment:
   = @article.attachment

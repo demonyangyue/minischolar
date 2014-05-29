@@ -3,9 +3,9 @@
 
   .form-inputs
     = f.input :title
-    = f.input :article_attachment
+    = f.input :article_attachment , as: :file
+    = f.input :article_attachment_cache , as: :hidden
     = f.input :attachment
-    = f.association :user
 
   .form-actions
     = f.button :submit

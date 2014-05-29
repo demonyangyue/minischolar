@@ -15,7 +15,9 @@ ActiveRecord::Schema.define(version: 20140526143953) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
+    #used to mount the upload
     t.string   "article_attachment"
+    #used to generate indicies
     t.string   "attachment"
     t.integer  "user_id"
     t.datetime "created_at"

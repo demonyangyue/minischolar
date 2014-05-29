@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 ruby '2.1.1'
 gem 'rails', '4.1.1'
 gem 'sqlite3'
@@ -22,3 +22,4 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
 end
+gem "carrierwave", "~>0.10"
