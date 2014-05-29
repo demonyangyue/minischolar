@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: "sample"
+#  owner: MyString
+  article_attachment: "hello world"
+#  attachment: MyString
+  user_id: 1
+#
+#two:
+#  title: MyString
+#  owner: MyString
+#  article_attachment: MyString
+#  attachment: MyString
+#  user_id: 

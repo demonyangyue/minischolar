@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @article.title
+%p
+  %b Article attachment:
+  = @article.article_attachment
+%p
+  %b Attachment:
+  = @article.attachment
+%p
+  %b User:
+  = @article.user.name
+
+= link_to 'Edit', edit_article_path(@article)
+\|
+= link_to 'Back', articles_path
