@@ -6,10 +6,16 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     if user_signed_in?
-      @articles = Article.where(user: current_user).to_a
+      @articles = Article.where(user: current_user).page(params[:page]).per(5)
     else
-      @articles = Article.all
+      @articles = Article.page(params[:page]).per(5)
     end
+  end
+
+  # GET /articles/search
+  def search
+    @articles = Article.search(params[:q]).page(params[:page]).per(10).records
+    render action: "index"
   end
 
   # GET /articles/1
@@ -75,6 +81,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :article_attachment, :attachment, :user_id)
+      params.require(:article).permit(:title, :article_attachment, :article_attachment_cache, :user_id)
     end
 end

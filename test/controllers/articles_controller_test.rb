@@ -10,7 +10,6 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:articles)
   end
 
   test "should get new" do
@@ -20,7 +19,7 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test "should create article" do
     assert_difference('Article.count') do
-      post :create, article: { article_attachment: @article.article_attachment,  title: "another article" }
+      post :create, article: { title: "another article" }
 
     end
 
@@ -40,7 +39,7 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should update article" do
-    patch :update, id: @article, article: { article_attachment: @article.article_attachment, title: @article.title }
+    patch :update, id: @article, article: {  title: @article.title}
     assert_redirected_to article_path(assigns(:article))
   end
 

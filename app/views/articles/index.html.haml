@@ -1,25 +1,39 @@
-%h1 Listing articles
+%h1= controller.action_name == 'search' ? 'Searching articles' : 'Listing articles'
 
-%table
-  %tr
-    %th Title
-    %th Article attachment
-    %th Attachment
-    %th User
-    %th
-    %th
-    %th
+= form_tag search_articles_path, method: 'get' do
+  .input-group
+    = text_field_tag :q, params[:q], class:'form-control', placeholder: 'Search...'
+    %span.input-group-btn
+      %button.btn.btn-default(type="button")
+      %span.glyphicon.glyphicon-search
 
-  - @articles.each do |article|
+  %hr
+
+%table.table.table-hover
+  %thead
     %tr
-      %td= article.title
-      %td= article.article_attachment
-      %td= article.attachment
-      %td= article.user.name
-      %td= link_to 'Show', article
-      %td= link_to 'Edit', edit_article_path(article)
-      %td= link_to 'Destroy', article, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Title
+      %th= controller.action_name == 'search'? 'Attachment' : 'Owner'
+      %th CreatedTime
+      %th
+      %th
 
-%br
+    %tbody
+      - @articles.__send__ controller.action_name == 'search' ? :each_with_hit : :each do |article, hit|
+        %tr
+          %td= hit.try(:highlight).try(:title)   ? hit.highlight.title.join.html_safe : article.title
+          %td= hit.try(:highlight).try(:attachment) ? hit.highlight.attachment.join('&hellip;').html_safe : article.user.name
+          %td=article.created_at
+          %td(style = "width: 50px")= link_to 'Show', article , class: 'btn btn-default btn-xs'
+          %td(style = "width: 50px")= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-default btn-xs'
 
-= link_to 'New Article', new_article_path
+
+.text-center
+  =paginate @articles
+
+%hr
+
+%p(style="text-align: center; margin-bottom: 21px")
+  = link_to 'New Article', new_article_path, class: 'btn btn-primary btn-xs', style: 'color: #fff' 
+  = link_to 'All Articles', articles_path, class: 'btn btn-primary btn-xs', style: 'color: #fff' if params[:q] 
+

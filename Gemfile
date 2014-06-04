@@ -22,4 +22,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
 end
+gem "kaminari", "~>0.15"
 gem "carrierwave", "~>0.10"
+gem "elasticsearch-model", "~>0.1"
+gem "elasticsearch-rails", "~>0.1"

@@ -1,18 +1,26 @@
 %p#notice= notice
+%p
+  %strong Title:
+  = @article.title
 
 %p
-  %b Title:
-  = @article.title
-%p
-  %b Article attachment:
-  = link_to "Right click to download", @article.article_attachment.url
-%p
-  %b Attachment:
-  = @article.attachment
-%p
-  %b User:
+  %strong Owner
   = @article.user.name
 
-= link_to 'Edit', edit_article_path(@article)
-\|
-= link_to 'Back', articles_path
+%p
+  %strong Document:
+
+  = link_to "Right click to download", @article.article_attachment.url 
+  - if @article.article_attachment.content_type 
+    - if @article.article_attachment.content_type.include?("pdf") 
+      #pdf
+        - @data=@article.article_attachment.url
+        %object(width="800" height="500" type="application/pdf" data=@data id="pdf_content")
+          %p Insert your error message here, if the PDF cannot be displayed.
+
+    - elsif @article.article_attachment.content_type.include?("text")
+      %pre
+        = @article.article_attachment.read 
+
+= link_to 'Edit', edit_article_path(@article)  |
+= link_to 'Back', articles_path 

@@ -2,14 +2,13 @@ require 'test_helper'
 
 class ArticleTest < ActiveSupport::TestCase
   setup do
-    @article = articles(:one)
+    @article = Article.create(title: "sample", article_attachment: File.open(file_path('bork.txt')), user_id: 1)
   end
   
-  test "title and article_attachment attributes must not be empty" do
+  test "title  attributes must not be empty" do
     article = Article.new
     assert article.invalid?
     assert article.errors[:title].any?
-    assert article.errors[:article_attachment].any?
   end
 
   test "article should have unique title" do 

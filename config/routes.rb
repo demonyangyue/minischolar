@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :articles
+  root :to => "articles#index"
+  resources :articles do 
+    collection {get :search}
+  end
 
-  root :to => "visitors#index"
   devise_for :users
   resources :users
 end
