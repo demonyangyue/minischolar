@@ -4,28 +4,42 @@
   .input-group
     = text_field_tag :q, params[:q], class:'form-control', placeholder: 'Search...'
     %span.input-group-btn
-      %button.btn.btn-default(type="button")
-      %span.glyphicon.glyphicon-search
+      %button.btn.btn-default(type="submit")
+        %span.glyphicon.glyphicon-search
 
   %hr
+
 
 %table.table.table-hover
   %thead
     %tr
       %th Title
-      %th= controller.action_name == 'search'? 'Attachment' : 'Owner'
+      - if controller.action_name == 'search'
+        %th Content
+      %th Owner
       %th CreatedTime
       %th
       %th
 
     %tbody
-      - @articles.__send__ controller.action_name == 'search' ? :each_with_hit : :each do |article, hit|
-        %tr
-          %td= hit.try(:highlight).try(:title)   ? hit.highlight.title.join.html_safe : article.title
-          %td= hit.try(:highlight).try(:attachment) ? hit.highlight.attachment.join('&hellip;').html_safe : article.user.name
-          %td=article.created_at
-          %td(style = "width: 50px")= link_to 'Show', article , class: 'btn btn-default btn-xs'
-          %td(style = "width: 50px")= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-default btn-xs'
+      - if controller.action_name == 'search'  
+        - @articles.__send__ :each_with_hit do |article, hit|
+          %tr
+            %td.col-md-2= hit.try(:highlight).try(:title)   ? hit.highlight.title.join.html_safe : article.title
+            %td.col-md-8= hit.try(:highlight).try(:attachment) ? hit.highlight.attachment.join('&hellip;').html_safe : "No content available"
+            %td.col-md-2= article.user.name
+            %td.col-md-4= article.created_at
+            %td.col-md-1= link_to 'Show', article , class: 'btn btn-default btn-xs'
+            %td.col-md-1= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-default btn-xs'
+      - else
+        - @articles.__send__ :each do |article|
+          %tr
+            %td.col-md-2= article.title
+
+            %td.col-md-2= article.user.name
+            %td.col-md-4= article.created_at
+            %td.col-md-1= link_to 'Show', article , class: 'btn btn-default btn-xs'
+            %td.col-md-1= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-default btn-xs'
 
 
 .text-center

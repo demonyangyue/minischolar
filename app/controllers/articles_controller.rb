@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/search
   def search
-    @articles = Article.search(params[:q]).page(params[:page]).per(10).records
+    @articles = Article.search(params[:q]).page(params[:page]).per(5).records
     render action: "index"
   end
 
