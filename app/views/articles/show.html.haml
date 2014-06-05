@@ -19,8 +19,7 @@
           %p Insert your error message here, if the PDF cannot be displayed.
 
     - elsif @article.article_attachment.content_type.include?("text")
-      %pre
-        = @article.article_attachment.read 
+      %pre= @article.article_attachment.file.read.to_s.force_encoding("UTF-8") 
 
 = link_to 'Edit', edit_article_path(@article)  |
 = link_to 'Back', articles_path 

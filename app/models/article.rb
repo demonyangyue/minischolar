@@ -1,7 +1,5 @@
 class Article < ActiveRecord::Base
   belongs_to :user
-  validates :title,  presence: true
-  validates :title, uniqueness: true
 
   mount_uploader :article_attachment, ArticleUploader
   

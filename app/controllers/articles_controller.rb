@@ -37,6 +37,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user_id = current_user.id
+    @article.title = File.basename(@article.article_attachment.file.file) if @article.article_attachment.file
 
     respond_to do |format|
       if @article.save

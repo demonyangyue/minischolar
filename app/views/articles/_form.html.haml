@@ -6,10 +6,7 @@
         - @article.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    %br= f.label :title
-    = f.text_field :title
-
+  
   .field
     %br= f.label :article_attachment
     = f.file_field :article_attachment
