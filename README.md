@@ -1,148 +1,54 @@
-Minischolar
-=========
+# Minischolar
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+Your personal file management website. You can use it to manage your own files, upload, download and search.
 
-Diagnostics
------------
+## Features
 
-This application was built with recipes that are NOT known to work together.
+* Support distributed files and indices, capable of serving large amount of files.
+* Support searching based on the file name, modified date and file content.
+* Support multiple files uploading.
 
-This application was built with preferences that are NOT known to work
-together.
+## Dependencies
 
-If the application doesn’t work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include these diagnostics:
+* Ruby 2.1.1 or higher.
+* [Elasticsearch](http://elasticsearch.org) 1.1.1 and or higher.
 
-We’d also like to know if you’ve found combinations of recipes or
-preferences that do work together.
+## Installation
 
-Recipes:
+Install it from a source code checkout:
+  
+    git clone https://github.com/demonyangyue/minischolar.git
+    bundle install
 
-* controllers
-* core
-* deployment
-* email
-* extras
-* frontend
-* gems
-* git
-* init
-* learn_rails
-* models
-* prelaunch
-* rails_bootstrap
-* rails_devise
-* rails_devise_pundit
-* rails_foundation
-* rails_omniauth
-* rails_signup_download
-* railsapps
-* readme
-* routes
-* saas
-* setup
-* testing
-* tests4
-* views
+## Usage
 
-Preferences:
+Take a look at the config/secrets.yml file, set the environment variable GMAIL_USERNAME and GMAIL_PASSWORD .
 
-* git: true
-* apps4: rails-devise-pundit
-* authentication: devise
-* authorization: pundit
-* better_errors: true
-* deployment: none
-* local_env_file: false
-* pry: false
-* quiet_assets: true
-* starter_app: false
-* dev_webserver: webrick
-* prod_webserver: passenger
-* database: sqlite
-* templates: haml
-* tests: none
-* frontend: bootstrap3
-* email: gmail
-* devise_modules: default
-* form_builder: simple_form
-* rvmrc: true
-* jsruntime: false
+For ubuntu instance, you can add two lines at the and of ~/.bashrc:
 
-Ruby on Rails
--------------
+```bash
+export GMAIL_USERNAME="YourEmailAddress"
+export GMAIL_PASSWORD="ApplicatonSpecificPassword"
+```
+Then
 
-This application requires:
+```bash
+rake db:migrate
+rake db:seed
+rails server
+```
+Enjoy it at localhost:3000.
 
--   Ruby
--   Rails
+## Mainly used gems
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
+* rails
+* bootstrap
+* devise
+* pundit
+* kaminari
+* carrierwave
+* elasticsearch-rails
+* elasticsearch-model
+* jquery-fileupload-rails
 
-Database
---------
 
-This application uses SQLite with ActiveRecord.
-
-Development
------------
-
--   Template Engine: Haml
--   Testing Framework: Test::Unit
--   Front-end Framework: Bootstrap 3.0 (Sass)
--   Form Builder: SimpleForm
--   Authentication: Devise
--   Authorization: None
--   Admin: None
-
-Email
------
-
-The application is configured to send email using a Gmail account.
-
-Email delivery is disabled in development.
-
-Getting Started
----------------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Documentation and Support
--------------------------
-
-This is the only documentation.
-
-#### Issues
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Similar Projects
-----------------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Contributing
-------------
-
-If you make improvements to this application, please share with others.
-
--   Fork the project on GitHub.
--   Make your feature addition or bug fix.
--   Commit with Git.
--   Send the author a pull request.
-
-If you add functionality to this application, create an alternative
-implementation, or build an application that is similar, please contact
-me and I’ll add a note to the README so that others can find your work.
-
-Credits
--------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-License
--------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.

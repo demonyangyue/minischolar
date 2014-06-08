@@ -42,10 +42,12 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
+        #format.json { render :show, status: :created, location: @article }
+        format.json { render json: {files: [@article.to_jq_upload]}, status: :created, location: @article }
       else
         format.html { render :new }
         format.json { render json: @article.errors, status: :unprocessable_entity }
+      
       end
     end
   end

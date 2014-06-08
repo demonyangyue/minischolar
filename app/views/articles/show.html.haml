@@ -1,25 +1,15 @@
 %p#notice= notice
-%p
-  %strong Title:
-  = @article.title
 
-%p
-  %strong Owner
-  = @article.user.name
+%body
+  %h2(align="center")= @article.title
 
-%p
-  %strong Document:
 
-  = link_to "Right click to download", @article.article_attachment.url 
-  - if @article.article_attachment.content_type 
-    - if @article.article_attachment.content_type.include?("pdf") 
-      #pdf
-        - @data=@article.article_attachment.url
-        %object(width="800" height="500" type="application/pdf" data=@data id="pdf_content")
-          %p Insert your error message here, if the PDF cannot be displayed.
+  #file(align="center")
+    - if @article.article_attachment.content_type 
+      - @type = @article.article_attachment.content_type
+      - @data=@article.article_attachment.url
+      %object(width="800" height="500" type=@type data=@data  )
+        %p The file can't be displayed 
 
-    - elsif @article.article_attachment.content_type.include?("text")
-      %pre= @article.article_attachment.file.read.to_s.force_encoding("UTF-8") 
 
-= link_to 'Edit', edit_article_path(@article)  |
-= link_to 'Back', articles_path 
+  = link_to 'Back', articles_path, class: 'btn btn-primary', style: 'color: #fff' 

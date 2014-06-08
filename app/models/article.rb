@@ -3,6 +3,16 @@ class Article < ActiveRecord::Base
 
   mount_uploader :article_attachment, ArticleUploader
   
+  include Rails.application.routes.url_helpers
+  def to_jq_upload
+    {
+      "title"        => read_attribute(:title),
+      "url"         => self.article_attachment.url,
+      "delete_url"  => article_path(self),
+      "delete_type" => "DELETE",
+    }
+  end
+
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
