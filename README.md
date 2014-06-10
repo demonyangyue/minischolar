@@ -6,6 +6,7 @@ Your personal file management website. You can use it to manage your own files, 
 
 * Support distributed files and indices, capable of serving large amount of files.
 * Support searching based on the file name, modified date and file content.
+* Support mulitple file formats, PDF, MS Word, txt, html etc.
 * Support multiple files uploading.
 
 ## Dependencies
